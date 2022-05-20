@@ -9,9 +9,6 @@ public class Stack {
         this.top = null;
     }
 
-    public static void main(String[] args) {
-
-    }
     public void insert(int key){
         /**
          * this method inserts new value to on top of stack
