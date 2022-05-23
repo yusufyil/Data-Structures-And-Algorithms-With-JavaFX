@@ -1,5 +1,6 @@
 package com.example.ds;
 
+import com.example.ds.StackDataStrcuture.Stack;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -11,6 +12,7 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.util.ArrayList;
 
 public class WelcomeScreen {
     Stage welcomeStage;
@@ -18,18 +20,27 @@ public class WelcomeScreen {
     AnchorPane anchorPane;
     private int width;
     private int height;
+    ArrayList<Stage> stageArrayList;
 
     public WelcomeScreen() {
         this.anchorPane = new AnchorPane();
         this.scene = new Scene(anchorPane, this.width, this.height);
         this.welcomeStage = new Stage();
         this.welcomeStage.setScene(this.scene);
-        this.setUpScreen();
+        stageArrayList = new ArrayList<>();
+
     }
     public WelcomeScreen(int screenWidth, int screenHeight){
         this();
         this.width = screenWidth;
         this.height = screenHeight;
+        loadStagesToArrayList();
+        this.setUpScreen();
+    }
+    public void loadStagesToArrayList(){
+        Stack stack = new Stack(this.width, this.height);
+        Stage stackStage = stack.getStackStage();
+        stageArrayList.add(stackStage);
     }
     public void setUpScreen(){
         this.anchorPane.setStyle("-fx-background-color: #10866f");
@@ -51,6 +62,13 @@ public class WelcomeScreen {
         stackButton.setLayoutY(100);
         stackButton.setOnMouseClicked(mouseEvent -> {
             System.out.println("stack.");
+            stageArrayList.get(0).show();
+        });
+        stackButton.setOnMouseEntered(mouseEvent -> {
+            stackButton.setStyle("-fx-background-color: #91f3b8");
+        });
+        stackButton.setOnMouseExited(mouseEvent -> {
+            stackButton.setStyle("-fx-background-color: #0CE672");
         });
         anchorPane.getChildren().add(stackButton);
 
@@ -67,6 +85,12 @@ public class WelcomeScreen {
         arrayButton.setOnMouseClicked(mouseEvent -> {
             System.out.println("array.");
         });
+        arrayButton.setOnMouseEntered(mouseEvent -> {
+            arrayButton.setStyle("-fx-background-color: #91f3b8");
+        });
+        arrayButton.setOnMouseExited(mouseEvent -> {
+            arrayButton.setStyle("-fx-background-color: #0CE672");
+        });
         anchorPane.getChildren().add(arrayButton);
 
         //creating button for Array data type
@@ -81,6 +105,12 @@ public class WelcomeScreen {
         binaryButton.setLayoutY(100);
         binaryButton.setOnMouseClicked(mouseEvent -> {
             System.out.println("bst.");
+        });
+        binaryButton.setOnMouseEntered(mouseEvent -> {
+            binaryButton.setStyle("-fx-background-color: #91f3b8");
+        });
+        binaryButton.setOnMouseExited(mouseEvent -> {
+            binaryButton.setStyle("-fx-background-color: #0CE672");
         });
         anchorPane.getChildren().add(binaryButton);
 
@@ -97,6 +127,12 @@ public class WelcomeScreen {
         queueButton.setOnMouseClicked(mouseEvent -> {
             System.out.println("queue.");
         });
+        queueButton.setOnMouseEntered(mouseEvent -> {
+            queueButton.setStyle("-fx-background-color: #91f3b8");
+        });
+        queueButton.setOnMouseExited(mouseEvent -> {
+            queueButton.setStyle("-fx-background-color: #0CE672");
+        });
         anchorPane.getChildren().add(queueButton);
 
         //creating button for Queue data type
@@ -111,6 +147,12 @@ public class WelcomeScreen {
         hashButton.setLayoutY(590);
         hashButton.setOnMouseClicked(mouseEvent -> {
             System.out.println("hash.");
+        });
+        hashButton.setOnMouseEntered(mouseEvent -> {
+            hashButton.setStyle("-fx-background-color: #91f3b8");
+        });
+        hashButton.setOnMouseExited(mouseEvent -> {
+            hashButton.setStyle("-fx-background-color: #0CE672");
         });
         anchorPane.getChildren().add(hashButton);
 
@@ -130,6 +172,7 @@ public class WelcomeScreen {
         this.welcomeStage.setTitle("Welcome!");
         this.welcomeStage.setWidth(this.width);
         this.welcomeStage.setHeight(this.height);
+        this.welcomeStage.setResizable(false);
         welcomeStage.show();
     }
     public Stage getWelcomeStage(){
