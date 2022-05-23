@@ -3,10 +3,14 @@ package com.example.ds;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
+
+import java.net.URL;
 
 public class WelcomeScreen {
     Stage welcomeStage;
@@ -109,6 +113,18 @@ public class WelcomeScreen {
             System.out.println("hash.");
         });
         anchorPane.getChildren().add(hashButton);
+
+        //creating an imageview for marun logo
+        URL urlToImage = getClass().getResource("marunlogo.png");
+        Image image = new Image(String.valueOf(urlToImage));
+        ImageView imageView = new ImageView(image);
+        imageView.setFitHeight(300);
+        imageView.setFitWidth(300);
+        imageView.setPreserveRatio(true);
+        imageView.setLayoutX(100 + 390 + 125);
+        imageView.setLayoutY(300);
+        anchorPane.getChildren().add(imageView);
+
 
 
         this.welcomeStage.setTitle("Welcome!");
