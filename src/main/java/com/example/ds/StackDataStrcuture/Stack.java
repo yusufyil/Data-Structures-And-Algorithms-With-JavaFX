@@ -1,6 +1,7 @@
 package com.example.ds.StackDataStrcuture;
 
-import javafx.scene.Node;
+import javafx.animation.SequentialTransition;
+import javafx.animation.TranslateTransition;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -13,6 +14,7 @@ import javafx.stage.Stage;
 
 public class Stack {
     StackNode top;
+    private int numberOfElements = 0;
 
     //attributes for graphical user interface
 
@@ -41,7 +43,7 @@ public class Stack {
         /**
          * this method inserts new value to on top of stack
          */
-        StackNode stackNode = new StackNode();
+        StackNode stackNode = new StackNode(key);
         stackNode.setValue(key);
         //assigning next node to top element of stack
         stackNode.setNext(this.top);
@@ -89,7 +91,7 @@ public class Stack {
         lineLeft.setStartX(50);
         lineLeft.setStartY(100);
         lineLeft.setEndX(50);
-        lineLeft.setEndY(600);
+        lineLeft.setEndY(800);
         lineLeft.setStrokeWidth(5);
         lineLeft.setStyle("-fx-stroke: " + color);
         this.anchorPane.getChildren().add(lineLeft);
@@ -98,21 +100,32 @@ public class Stack {
         lineRight.setStartX(250);
         lineRight.setStartY(100);
         lineRight.setEndX(250);
-        lineRight.setEndY(600);
+        lineRight.setEndY(800);
         lineRight.setStrokeWidth(5);
         lineRight.setStyle("-fx-stroke: " + color);
         this.anchorPane.getChildren().add(lineRight);
 
         Line lineBottom = new Line();
         lineBottom.setStartX(50);
-        lineBottom.setStartY(600);
+        lineBottom.setStartY(800);
         lineBottom.setEndX(250);
-        lineBottom.setEndY(600);
+        lineBottom.setEndY(800);
         lineBottom.setStrokeWidth(5);
         lineBottom.setStyle("-fx-stroke: " + color);
         this.anchorPane.getChildren().add(lineBottom);
 
         Font font = Font.font("Courier New", FontWeight.BOLD, 36);
+
+        TextField textField = new TextField();
+        textField.setLayoutX(990);
+        textField.setLayoutY(100);
+        textField.setPrefWidth(390);
+        textField.setPrefHeight(60);
+        textField.setStyle("-fx-background-color: " + color);
+        textField.setFont(font);
+        textField.setText("Any number");
+        this.anchorPane.getChildren().add(textField);
+
         Button pushToStack = new Button();
         pushToStack.setLayoutX(400);
         pushToStack.setLayoutY(100);
@@ -127,17 +140,36 @@ public class Stack {
         pushToStack.setOnMouseExited(mouseEvent -> {
             pushToStack.setStyle("-fx-background-color: " + color);
         });
+        pushToStack.setOnMouseClicked(mouseEvent -> {
+            try{
+                int value = readFromTextField(textField.getText());
+                System.out.println(value);
+                insert(value);
+                StackNode top = this.top;
+                top.setLayoutX(-400);
+                top.setLayoutY(20);
+                //making node come from outside of screen
+                TranslateTransition rightTransition = new TranslateTransition();
+                rightTransition.setNode(top);
+                rightTransition.setByX(455);
+
+                //pushing node down to bottom
+                TranslateTransition bottomTransition = new TranslateTransition();
+                bottomTransition.setNode(top);
+                bottomTransition.setByY(715 - (63 * numberOfElements));
+
+                SequentialTransition sequentialTransition = new SequentialTransition(rightTransition, bottomTransition);
+                sequentialTransition.play();
+
+                numberOfElements++;
+                this.anchorPane.getChildren().add(top);
+                this.anchorPane.getChildren().add(top.text);
+            }catch (Exception e){
+                System.out.println("Error");
+            }
+        });
         this.anchorPane.getChildren().add(pushToStack);
 
-        TextField textField = new TextField();
-        textField.setLayoutX(990);
-        textField.setLayoutY(100);
-        textField.setPrefWidth(390);
-        textField.setPrefHeight(60);
-        textField.setStyle("-fx-background-color: " + color);
-        textField.setFont(font);
-        textField.setText("Any number");
-        this.anchorPane.getChildren().add(textField);
 
         Button popFromStack = new Button();
         popFromStack.setLayoutX(400);
@@ -174,7 +206,9 @@ public class Stack {
 
     }
     public Stage getStackStage(){
-
         return this.stackStage;
+    }
+    public int readFromTextField(String textField){
+        return Integer.valueOf(textField);
     }
 }
