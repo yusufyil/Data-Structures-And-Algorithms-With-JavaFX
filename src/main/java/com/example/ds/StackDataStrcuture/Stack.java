@@ -3,7 +3,9 @@ package com.example.ds.StackDataStrcuture;
 import javafx.animation.SequentialTransition;
 import javafx.animation.TranslateTransition;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Line;
@@ -11,6 +13,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 public class Stack {
     StackNode top;
@@ -141,6 +144,16 @@ public class Stack {
             pushToStack.setStyle("-fx-background-color: " + color);
         });
         pushToStack.setOnMouseClicked(mouseEvent -> {
+            //if there is 11 node in the stack already, stop taking new ones. Because it won't fit scene.
+            if(numberOfElements >= 11){
+                System.out.println("Reached maximum number of elements.");
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Alert!");
+                alert.setHeaderText("Reached maximum element number.");
+                alert.setContentText("There is not enough space to fit more nodes in to the scene.");
+                alert.show();
+                return;
+            }
             try{
                 int value = readFromTextField(textField.getText());
                 System.out.println(value);
@@ -148,28 +161,32 @@ public class Stack {
                 StackNode top = this.top;
                 top.setLayoutX(-400);
                 top.setLayoutY(20);
+                this.anchorPane.getChildren().add(top);
+
                 //making node come from outside of screen
                 TranslateTransition rightTransition = new TranslateTransition();
                 rightTransition.setNode(top);
+                rightTransition.setDuration(Duration.millis(500));
                 rightTransition.setByX(455);
+
 
                 //pushing node down to bottom
                 TranslateTransition bottomTransition = new TranslateTransition();
                 bottomTransition.setNode(top);
+                bottomTransition.setDuration(Duration.millis(500));
                 bottomTransition.setByY(715 - (63 * numberOfElements));
 
                 SequentialTransition sequentialTransition = new SequentialTransition(rightTransition, bottomTransition);
                 sequentialTransition.play();
+                this.top.placeLabel(anchorPane, this.numberOfElements);
+                textField.clear();
 
                 numberOfElements++;
-                this.anchorPane.getChildren().add(top);
-                this.anchorPane.getChildren().add(top.text);
             }catch (Exception e){
                 System.out.println("Error");
             }
         });
         this.anchorPane.getChildren().add(pushToStack);
-
 
         Button popFromStack = new Button();
         popFromStack.setLayoutX(400);
@@ -184,6 +201,30 @@ public class Stack {
         });
         popFromStack.setOnMouseExited(mouseEvent -> {
             popFromStack.setStyle("-fx-background-color: " + color);
+        });
+        popFromStack.setOnMouseClicked(mouseEvent -> {
+            if(this.top == null){
+                textField.setText("Stack is empty.");
+            }else{
+                textField.setText(Integer.toString(this.top.getValue()));
+
+                StackNode node = this.top;
+                TranslateTransition topTransition = new TranslateTransition();
+                topTransition.setNode(node);
+                topTransition.setDuration(Duration.millis(600));
+                topTransition.setByY(-1000);
+                topTransition.play();
+
+                TranslateTransition topTransitionForText = new TranslateTransition();
+                topTransitionForText.setNode(node.label);
+                topTransitionForText.setDuration(Duration.millis(600));
+                topTransitionForText.setByY(-1000);
+                topTransitionForText.play();
+
+                this.pop();
+                numberOfElements--;
+
+            }
         });
         this.anchorPane.getChildren().add(popFromStack);
 
@@ -200,6 +241,13 @@ public class Stack {
         });
         peekFromStack.setOnMouseExited(mouseEvent -> {
             peekFromStack.setStyle("-fx-background-color: " + color);
+        });
+        peekFromStack.setOnMouseClicked(mouseEvent -> {
+            if(this.top == null){
+                textField.setText("Stack is empty.");
+            }else{
+                textField.setText(Integer.toString(this.top.getValue()));
+            }
         });
         this.anchorPane.getChildren().add(peekFromStack);
 
