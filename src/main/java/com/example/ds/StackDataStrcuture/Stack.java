@@ -149,7 +149,7 @@ public class Stack {
                 System.out.println("Reached maximum number of elements.");
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Alert!");
-                alert.setHeaderText("Reached maximum element number.");
+                alert.setHeaderText("Reached maximum number of elements.");
                 alert.setContentText("There is not enough space to fit more nodes in to the scene.");
                 alert.show();
                 return;

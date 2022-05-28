@@ -1,5 +1,6 @@
 package com.example.ds;
 
+import com.example.ds.ArrayDataStructure.Array;
 import com.example.ds.StackDataStrcuture.Stack;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -41,6 +42,10 @@ public class WelcomeScreen {
         Stack stack = new Stack(this.width, this.height);
         Stage stackStage = stack.getStackStage();
         stageArrayList.add(stackStage);
+
+        Array array = new Array(this.width, this.height);
+        Stage arrayStage = array.getArrayStage();
+        stageArrayList.add(arrayStage);
     }
     public void setUpScreen(){
         this.anchorPane.setStyle("-fx-background-color: #10866f");
@@ -52,7 +57,7 @@ public class WelcomeScreen {
 
         //creating button for stack data type
         Button stackButton = new Button();
-        stackButton.setText("Stack Data Type");
+        stackButton.setText("Stack Data St.");
         Font stackFont = Font.font("Courier New", FontWeight.BOLD, 36);
         stackButton.setFont(stackFont);
         stackButton.setStyle("-fx-background-color: #0CE672");
@@ -74,7 +79,7 @@ public class WelcomeScreen {
 
         //creating button for Array data type
         Button arrayButton = new Button();
-        arrayButton.setText("Array Data Type");
+        arrayButton.setText("Array Data St.");
         Font arrayFont = Font.font("Courier New", FontWeight.BOLD, 36);
         arrayButton.setFont(arrayFont);
         arrayButton.setStyle("-fx-background-color: #0CE672");
@@ -84,6 +89,7 @@ public class WelcomeScreen {
         arrayButton.setLayoutY(100);
         arrayButton.setOnMouseClicked(mouseEvent -> {
             System.out.println("array.");
+            stageArrayList.get(1).show();
         });
         arrayButton.setOnMouseEntered(mouseEvent -> {
             arrayButton.setStyle("-fx-background-color: #91f3b8");
@@ -95,7 +101,7 @@ public class WelcomeScreen {
 
         //creating button for Array data type
         Button binaryButton = new Button();
-        binaryButton.setText("Binary s. Tree");
+        binaryButton.setText("Binary S. Tree");
         Font binaryFont = Font.font("Courier New", FontWeight.BOLD, 36);
         binaryButton.setFont(binaryFont);
         binaryButton.setStyle("-fx-background-color: #0CE672");
@@ -116,7 +122,7 @@ public class WelcomeScreen {
 
         //creating button for Queue data type
         Button queueButton = new Button();
-        queueButton.setText("Queue Data Type");
+        queueButton.setText("Queue Data St.");
         Font queueFont = Font.font("Courier New", FontWeight.BOLD, 36);
         queueButton.setFont(queueFont);
         queueButton.setStyle("-fx-background-color: #0CE672");
