@@ -219,9 +219,6 @@ public class Array {
             }
         });
         this.anchorPane.getChildren().add(insertValue);
-
-
-
     }
     public Stage getArrayStage(){
         return this.arrayStage;
