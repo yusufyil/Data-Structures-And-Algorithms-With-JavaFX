@@ -15,9 +15,12 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+
 public class Array {
 
     int[] arr;
+    ArrayList<Label> listOfLabels;
 
     Stage arrayStage;
 
@@ -36,6 +39,7 @@ public class Array {
         this.scene = new Scene(anchorPane, this.width, this.height);
         this.arrayStage = new Stage();
         this.arrayStage.setScene(this.scene);
+        this.listOfLabels = new ArrayList<>();
         this.setUpScreen();
     }
     public void createArray(int size){
@@ -121,6 +125,7 @@ public class Array {
             value.setLayoutX(startingPositionX + 5 + i * 100);
             value.setLayoutY(200);
             value.setStyle("-fx-background-color: #91f3b8");
+            listOfLabels.add(value);
             arrayBoundries.getChildren().add(value);
 
             Line upperLine = new Line();
@@ -198,6 +203,20 @@ public class Array {
         });
         insertValue.setOnMouseExited(mouseEvent -> {
             insertValue.setStyle("-fx-background-color: #2ada72");
+        });
+        insertValue.setOnMouseClicked(mouseEvent -> {
+            try{
+                int index = Integer.parseInt(indexField.getText());
+                int value = Integer.parseInt(valueField.getText());
+                listOfLabels.get(index).setText(String.valueOf(value));
+            }catch (Exception e){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error!");
+                alert.setHeaderText("Each text-field should be correctly filled.");
+                alert.setContentText("Both text-fields are have to filled with whole numbers and index field can't exceed" +
+                        " length of array.");
+                alert.show();
+            }
         });
         this.anchorPane.getChildren().add(insertValue);
 
