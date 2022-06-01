@@ -126,7 +126,7 @@ public class Stack {
         textField.setPrefHeight(60);
         textField.setStyle("-fx-background-color: " + color);
         textField.setFont(font);
-        textField.setText("Any number");
+        textField.setPromptText("Any number");
         this.anchorPane.getChildren().add(textField);
 
         Button pushToStack = new Button();

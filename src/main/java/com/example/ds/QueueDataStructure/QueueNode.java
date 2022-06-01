@@ -11,5 +11,21 @@ public class QueueNode {
     public  QueueNode(int key){
         this.key = key;
     }
+
+    public QueueNode getNext() {
+        return next;
+    }
+
+    public void setNext(QueueNode next) {
+        this.next = next;
+    }
+
+    public int getKey() {
+        return key;
+    }
+
+    public void setKey(int key) {
+        this.key = key;
+    }
 }
 

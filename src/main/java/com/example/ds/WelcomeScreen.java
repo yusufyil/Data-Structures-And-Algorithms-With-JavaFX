@@ -1,6 +1,7 @@
 package com.example.ds;
 
 import com.example.ds.ArrayDataStructure.Array;
+import com.example.ds.QueueDataStructure.Queue;
 import com.example.ds.StackDataStrcuture.Stack;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -46,6 +47,10 @@ public class WelcomeScreen {
         Array array = new Array(this.width, this.height);
         Stage arrayStage = array.getArrayStage();
         stageArrayList.add(arrayStage);
+
+        Queue queue = new Queue(this.width, this.height);
+        Stage queueStage = queue.getQueueStage();
+        stageArrayList.add(queueStage);
     }
     public void setUpScreen(){
         this.anchorPane.setStyle("-fx-background-color: #10866f");
@@ -132,6 +137,7 @@ public class WelcomeScreen {
         queueButton.setLayoutY(590);
         queueButton.setOnMouseClicked(mouseEvent -> {
             System.out.println("queue.");
+            stageArrayList.get(2).show();
         });
         queueButton.setOnMouseEntered(mouseEvent -> {
             queueButton.setStyle("-fx-background-color: #91f3b8");
