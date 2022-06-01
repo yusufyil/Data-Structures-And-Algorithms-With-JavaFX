@@ -4,10 +4,14 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.shape.Line;
+import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -39,7 +43,7 @@ public class Array {
     }
     public void setUpScreen(){
         this.anchorPane.setStyle("-fx-background-color: #2d9614");
-        this.arrayStage.setTitle("Stack Data Structure.");
+        this.arrayStage.setTitle("Array Data Structure.");
         this.arrayStage.setResizable(false);
         this.arrayStage.setWidth(this.width);
         this.arrayStage.setHeight(this.height);
@@ -61,7 +65,7 @@ public class Array {
         createArrayButton.setOnMouseClicked(mouseEvent -> {
             try{
                 int size = Integer.parseInt(arraySize.getText());
-                if (size <= 0){
+                if (size <= 0 || size > 15){
                     throw new Exception();
                 }else {
                     arr = new int[size];
@@ -74,7 +78,7 @@ public class Array {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
                 alert.setTitle("Warning");
                 alert.setHeaderText("Wrong input has been given.");
-                alert.setContentText("Input has to be a valid integer in range of 1 and 100.");
+                alert.setContentText("Input has to be a valid integer in range of 1 and 15 exclusively.");
                 alert.show();
 
             }
@@ -86,7 +90,7 @@ public class Array {
             createArrayButton.setStyle("-fx-background-color: #07af98");
         });
 
-        arraySize.setText("Enter Array Size");
+        arraySize.setPromptText("Enter Array Size");
         arraySize.setFont(font);
         arraySize.setPrefWidth(390);
         arraySize.setPrefHeight(60);
@@ -96,8 +100,109 @@ public class Array {
         anchorPane.getChildren().add(arraySize);
     }
     public void drawArrayToPane(){
-        Font font = Font.font("Courier New", FontWeight.BOLD, 36);
+        Font font = Font.font("Courier New", FontWeight.BOLD, 24);
         Group arrayBoundries = new Group();
+
+        //drawing an appropriate rectangle to represent array
+        int startingPositionX = ((int)arrayStage.getWidth() - (100 * this.arr.length + (this.arr.length + 1) * 5)) / 2;
+        for(int i = 0; i < this.arr.length; i++){
+            Rectangle rectangle = new Rectangle();
+            rectangle.setWidth(100);
+            rectangle.setHeight(60);
+            rectangle.setLayoutX(startingPositionX + i * 100);
+            rectangle.setLayoutY(200);
+            rectangle.setStyle("-fx-background-color: #91f3b8");
+            arrayBoundries.getChildren().add(rectangle);
+
+            Label value = new Label(Integer.toString(this.arr[i]));
+            value.setFont(font);
+            value.setPrefWidth(100);
+            value.setPrefHeight(60);
+            value.setLayoutX(startingPositionX + 5 + i * 100);
+            value.setLayoutY(200);
+            value.setStyle("-fx-background-color: #91f3b8");
+            arrayBoundries.getChildren().add(value);
+
+            Line upperLine = new Line();
+            upperLine.setStartX(startingPositionX + i * 100);
+            upperLine.setStartY(200);
+            upperLine.setEndX(startingPositionX + i * 100 + 100);
+            upperLine.setEndY(200);
+            upperLine.setStrokeWidth(5);
+            arrayBoundries.getChildren().add(upperLine);
+
+            Line bottomLine = new Line();
+            bottomLine.setStartX(startingPositionX + i * 100);
+            bottomLine.setStartY(260);
+            bottomLine.setEndX(startingPositionX + i * 100 + 100);
+            bottomLine.setEndY(260);
+            bottomLine.setStrokeWidth(5);
+            arrayBoundries.getChildren().add(bottomLine);
+
+            Line sideLine = new Line();
+            sideLine.setStartX(startingPositionX + i * 100 + 105);
+            sideLine.setStartY(200);
+            sideLine.setEndX(startingPositionX + i * 100 + 105);
+            sideLine.setEndY(260);
+            sideLine.setStrokeWidth(5);
+            arrayBoundries.getChildren().add(sideLine);
+        }
+        //adding first vertical line to the pane
+        Line startingline = new Line();
+        startingline.setStartX(startingPositionX);
+        startingline.setStartY(200);
+        startingline.setEndX(startingPositionX);
+        startingline.setEndY(260);
+        startingline.setStrokeWidth(5);
+        arrayBoundries.getChildren().add(startingline);
+
+        this.anchorPane.getChildren().add(arrayBoundries);
+
+        Label indexLabel = new Label();
+        indexLabel.setFont(font);
+        indexLabel.setText("Index :");
+        indexLabel.setLayoutX(this.arrayStage.getWidth() / 2 - 120);
+        indexLabel.setLayoutY(400);
+        this.anchorPane.getChildren().add(indexLabel);
+
+        Label valueLabel = new Label();
+        valueLabel.setFont(font);
+        valueLabel.setText("Value :");
+        valueLabel.setLayoutX(this.arrayStage.getWidth() / 2 - 120);
+        valueLabel.setLayoutY(450);
+        this.anchorPane.getChildren().add(valueLabel);
+
+        TextField indexField = new TextField();
+        indexField.setPromptText("Enter index number");
+        indexField.setLayoutX(this.arrayStage.getWidth() / 2 );
+        indexField.setLayoutY(400);
+        this.anchorPane.getChildren().add(indexField);
+
+        TextField valueField = new TextField();
+        valueField.setPromptText("Enter value");
+        valueField.setLayoutX(this.arrayStage.getWidth() / 2 );
+        valueField.setLayoutY(450);
+        this.anchorPane.getChildren().add(valueField);
+
+        Button insertValue = new Button();
+        insertValue.setText("Insert");
+        insertValue.setTextAlignment(TextAlignment.CENTER);
+        insertValue.setFont(font);
+        insertValue.setPrefWidth(275);
+        insertValue.setPrefHeight(50);
+        insertValue.setLayoutX(this.arrayStage.getWidth() / 2 - 120);
+        insertValue.setLayoutY(500);
+        insertValue.setStyle("-fx-background-color: #2ada72");
+        insertValue.setOnMouseEntered(mouseEvent -> {
+            insertValue.setStyle("-fx-background-color: #91f3b8");
+        });
+        insertValue.setOnMouseExited(mouseEvent -> {
+            insertValue.setStyle("-fx-background-color: #2ada72");
+        });
+        this.anchorPane.getChildren().add(insertValue);
+
+
+
     }
     public Stage getArrayStage(){
         return this.arrayStage;
