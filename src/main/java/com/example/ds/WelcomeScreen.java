@@ -1,6 +1,7 @@
 package com.example.ds;
 
 import com.example.ds.ArrayDataStructure.Array;
+import com.example.ds.BinarySearchTreeDataStructure.BinarySearchTree;
 import com.example.ds.QueueDataStructure.Queue;
 import com.example.ds.StackDataStrcuture.Stack;
 import javafx.scene.Scene;
@@ -51,6 +52,10 @@ public class WelcomeScreen {
         Queue queue = new Queue(this.width, this.height);
         Stage queueStage = queue.getQueueStage();
         stageArrayList.add(queueStage);
+
+        BinarySearchTree BST = new BinarySearchTree(this.width, this.height);
+        Stage BSTStage = BST.getBSTStage();
+        stageArrayList.add(BSTStage);
     }
     public void setUpScreen(){
         this.anchorPane.setStyle("-fx-background-color: #10866f");
@@ -104,7 +109,7 @@ public class WelcomeScreen {
         });
         anchorPane.getChildren().add(arrayButton);
 
-        //creating button for Array data type
+        //creating button for Binary search tree data type
         Button binaryButton = new Button();
         binaryButton.setText("Binary S. Tree");
         Font binaryFont = Font.font("Courier New", FontWeight.BOLD, 36);
@@ -116,6 +121,7 @@ public class WelcomeScreen {
         binaryButton.setLayoutY(100);
         binaryButton.setOnMouseClicked(mouseEvent -> {
             System.out.println("bst.");
+            stageArrayList.get(3).show();
         });
         binaryButton.setOnMouseEntered(mouseEvent -> {
             binaryButton.setStyle("-fx-background-color: #91f3b8");
