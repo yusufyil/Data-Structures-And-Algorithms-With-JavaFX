@@ -2,7 +2,12 @@ package com.example.ds.BinarySearchTreeDataStructure;
 
 import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
@@ -73,8 +78,7 @@ public class BinarySearchTree {
 
         return root;
     }
-    public int minValue(BSTNode root)
-    {
+    public int minValue(BSTNode root) {
         int min = root.value;
         while (root.left != null){
             min = root.left.value;
@@ -89,6 +93,52 @@ public class BinarySearchTree {
         this.BSTStage.setWidth(this.width);
         this.BSTStage.setHeight(this.height);
         this.BSTStage.initModality(Modality.APPLICATION_MODAL);
+    }
+    public void setUpMiniScreen(){
+        //crating a mini screen for assigning values into tree.
+        VBox vBox = new VBox();
+        Font font = Font.font("Courier New", FontWeight.BOLD, 36);
+        TextField textField = new TextField();
+        textField.setPrefWidth(390);
+        textField.setPrefHeight(60);
+        textField.setStyle("-fx-background-color: #9fbbea");
+        textField.setFont(font);
+        textField.setPromptText("Any number");
+        vBox.getChildren().add(textField);
+
+        Button insertToTree = new Button();
+        insertToTree.setText("Insert");
+        insertToTree.setPrefWidth(390);
+        insertToTree.setPrefHeight(60);
+        insertToTree.setFont(font);
+        insertToTree.setStyle("-fx-background-color: #2fdc60");
+        insertToTree.setOnMouseEntered(mouseEvent -> {
+            insertToTree.setStyle("-fx-background-color: #9fbbea");
+        });
+        insertToTree.setOnMouseExited(mouseEvent -> {
+            insertToTree.setStyle("-fx-background-color: #2fdc60");
+        });
+        vBox.getChildren().add(insertToTree);
+
+        Button deleteFromTree = new Button();
+        deleteFromTree.setText("Delete");
+        deleteFromTree.setPrefWidth(390);
+        deleteFromTree.setPrefHeight(60);
+        deleteFromTree.setFont(font);
+        deleteFromTree.setStyle("-fx-background-color: #2fdc60");
+        deleteFromTree.setOnMouseEntered(mouseEvent -> {
+            deleteFromTree.setStyle("-fx-background-color: #9fbbea");
+        });
+        deleteFromTree.setOnMouseExited(mouseEvent -> {
+            deleteFromTree.setStyle("-fx-background-color: #2fdc60");
+        });
+        vBox.getChildren().add(deleteFromTree);
+
+        Scene scene1 = new Scene(vBox);
+        Stage miniStage = new Stage();
+        miniStage.setScene(scene1);
+        miniStage.setAlwaysOnTop(true);
+        miniStage.show();
     }
     public Stage getBSTStage(){
         return BSTStage;
