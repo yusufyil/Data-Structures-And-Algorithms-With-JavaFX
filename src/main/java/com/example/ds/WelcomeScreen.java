@@ -23,39 +23,18 @@ public class WelcomeScreen {
     AnchorPane anchorPane;
     private int width;
     private int height;
-    ArrayList<Stage> stageArrayList;
 
     public WelcomeScreen() {
         this.anchorPane = new AnchorPane();
         this.scene = new Scene(anchorPane, this.width, this.height);
         this.welcomeStage = new Stage();
         this.welcomeStage.setScene(this.scene);
-        stageArrayList = new ArrayList<>();
-
     }
     public WelcomeScreen(int screenWidth, int screenHeight){
         this();
         this.width = screenWidth;
         this.height = screenHeight;
-        loadStagesToArrayList();
         this.setUpScreen();
-    }
-    public void loadStagesToArrayList(){
-        Stack stack = new Stack(this.width, this.height);
-        Stage stackStage = stack.getStackStage();
-        stageArrayList.add(stackStage);
-
-        Array array = new Array(this.width, this.height);
-        Stage arrayStage = array.getArrayStage();
-        stageArrayList.add(arrayStage);
-
-        Queue queue = new Queue(this.width, this.height);
-        Stage queueStage = queue.getQueueStage();
-        stageArrayList.add(queueStage);
-
-        BinarySearchTree BST = new BinarySearchTree(this.width, this.height);
-        Stage BSTStage = BST.getBSTStage();
-        stageArrayList.add(BSTStage);
     }
     public void setUpScreen(){
         this.anchorPane.setStyle("-fx-background-color: #10866f");
@@ -76,8 +55,9 @@ public class WelcomeScreen {
         stackButton.setLayoutX(100);
         stackButton.setLayoutY(100);
         stackButton.setOnMouseClicked(mouseEvent -> {
-            System.out.println("stack.");
-            stageArrayList.get(0).show();
+            Stack stack = new Stack(this.width, this.height);
+            Stage stackStage = stack.getStackStage();
+            stackStage.show();
         });
         stackButton.setOnMouseEntered(mouseEvent -> {
             stackButton.setStyle("-fx-background-color: #91f3b8");
@@ -98,8 +78,9 @@ public class WelcomeScreen {
         arrayButton.setLayoutX(100 + 390 + 65);
         arrayButton.setLayoutY(100);
         arrayButton.setOnMouseClicked(mouseEvent -> {
-            System.out.println("array.");
-            stageArrayList.get(1).show();
+            Array array = new Array(this.width, this.height);
+            Stage arrayStage = array.getArrayStage();
+            arrayStage.show();
         });
         arrayButton.setOnMouseEntered(mouseEvent -> {
             arrayButton.setStyle("-fx-background-color: #91f3b8");
@@ -120,8 +101,9 @@ public class WelcomeScreen {
         binaryButton.setLayoutX(100 + 390 + 125 + 390);
         binaryButton.setLayoutY(100);
         binaryButton.setOnMouseClicked(mouseEvent -> {
-            System.out.println("bst.");
-            stageArrayList.get(3).show();
+            BinarySearchTree BST = new BinarySearchTree(this.width, this.height);
+            Stage BSTStage = BST.getBSTStage();
+            BSTStage.show();
         });
         binaryButton.setOnMouseEntered(mouseEvent -> {
             binaryButton.setStyle("-fx-background-color: #91f3b8");
@@ -142,8 +124,9 @@ public class WelcomeScreen {
         queueButton.setLayoutX(100);
         queueButton.setLayoutY(590);
         queueButton.setOnMouseClicked(mouseEvent -> {
-            System.out.println("queue.");
-            stageArrayList.get(2).show();
+            Queue queue = new Queue(this.width, this.height);
+            Stage queueStage = queue.getQueueStage();
+            queueStage.show();
         });
         queueButton.setOnMouseEntered(mouseEvent -> {
             queueButton.setStyle("-fx-background-color: #91f3b8");
