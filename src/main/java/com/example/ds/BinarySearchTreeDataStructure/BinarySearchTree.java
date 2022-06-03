@@ -1,5 +1,6 @@
 package com.example.ds.BinarySearchTreeDataStructure;
 
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
@@ -30,7 +31,56 @@ public class BinarySearchTree {
 
     }
     public void insert(int value){
+        this.root = this.insertRecursively(root, value);
+    }
+    private BSTNode insertRecursively(BSTNode root, int value){
 
+        if (root == null) {
+            root = new BSTNode(value);
+            return root;
+        }
+
+        if (value <= root.value) {
+            root.left = insertRecursively(root.left, value);
+        } else if (value > root.value) {
+            root.right = insertRecursively(root.right, value);
+        }
+        return root;
+    }
+    public void delete(int value){
+        this.root = deleteRecursively(root, value);
+    }
+    public BSTNode deleteRecursively(BSTNode root, int value){
+        if (root == null){
+            return root;
+        }
+
+        if (value < root.value) {
+            root.left = deleteRecursively(root.left, value);
+        } else if (value > root.value) {
+            root.right = deleteRecursively(root.right, value);
+        }else {
+            if (root.left == null){
+                return root.right;
+            }else if (root.right == null){
+                return root.left;
+            }
+
+            root.value = minValue(root.right);
+
+            root.right = deleteRecursively(root.right, root.value);
+        }
+
+        return root;
+    }
+    public int minValue(BSTNode root)
+    {
+        int min = root.value;
+        while (root.left != null){
+            min = root.left.value;
+            root = root.left;
+        }
+        return min;
     }
     public void setUpScreen(){
         this.anchorPane.setStyle("-fx-background-color: #0b9494");
