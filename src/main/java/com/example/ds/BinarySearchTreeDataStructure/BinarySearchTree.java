@@ -19,7 +19,7 @@ public class BinarySearchTree {
     public BSTNode root;
 
     //attributes for graphical user interface
-    Stage BSTStage;
+    public Stage BSTStage;
 
     Scene scene;
 
