@@ -107,6 +107,31 @@ public class HashMap {
         });
         this.anchorPane.getChildren().add(insertValue);
 
+        Button deleteValue = new Button();
+        deleteValue.setText("Delete");
+        deleteValue.setTextAlignment(TextAlignment.CENTER);
+        deleteValue.setFont(font);
+        deleteValue.setPrefWidth(275);
+        deleteValue.setPrefHeight(50);
+        deleteValue.setLayoutX(this.HashMapStage.getWidth() / 2 - 330);
+        deleteValue.setLayoutY(570);
+        deleteValue.setStyle("-fx-background-color: #0b85b9");
+        deleteValue.setOnMouseClicked(mouseEvent -> {
+            try{
+                int value = Integer.parseInt(valueField.getText());
+                int index = value % 10;
+                hashMapNodes[index].binarySearchTree.delete(value);
+                hashMapNodes[index].updateLabel();
+            }catch (Exception e){
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setTitle("Error!");
+                alert.setHeaderText("Wrong argument!");
+                alert.setHeaderText("User input has to be an integer.");
+                alert.show();
+            }
+        });
+        this.anchorPane.getChildren().add(deleteValue);
+
     }
     public Stage getHashMapStage(){
         return this.HashMapStage;

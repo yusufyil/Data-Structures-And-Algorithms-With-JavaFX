@@ -15,6 +15,8 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.util.function.Predicate;
+
 public class BinarySearchTree {
     public BSTNode root;
 
@@ -91,8 +93,10 @@ public class BinarySearchTree {
             root.right = deleteRecursively(root.right, value);
         }else {
             if (root.left == null){
+                this.anchorPane.getChildren().remove(root.group);
                 return root.right;
             }else if (root.right == null){
+                this.anchorPane.getChildren().remove(root.group);
                 return root.left;
             }
 
