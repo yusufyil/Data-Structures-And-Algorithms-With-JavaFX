@@ -3,9 +3,13 @@ package com.example.ds.BinarySearchTreeDataStructure;
 
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
+import javafx.scene.shape.Line;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.stage.Modality;
@@ -51,8 +55,24 @@ public class BinarySearchTree {
         }else{
             if (value < root.value) {
                 root.left = insertRecursively(root.left, value, startX - 150, startY + 80);
+                Line line = new Line();
+                line.setStartX(startX - 18);
+                line.setStartY(startY + 18);
+                line.setEndX(startX - 132);
+                line.setEndY(startY + 62);
+                line.setStrokeWidth(5);
+                line.setStroke(Paint.valueOf("#d76464"));//setting same color with circle
+                this.anchorPane.getChildren().add(line);
             } else if (value > root.value) {
                 root.right = insertRecursively(root.right, value, startX + 150, startY + 80);
+                Line line = new Line();
+                line.setStartX(startX + 18);
+                line.setStartY(startY + 18);
+                line.setEndX(startX + 132);
+                line.setEndY(startY + 62);
+                line.setStrokeWidth(5);
+                line.setStroke(Paint.valueOf("#d76464"));//setting same color with circle
+                this.anchorPane.getChildren().add(line);
             }
         }
         return root;
