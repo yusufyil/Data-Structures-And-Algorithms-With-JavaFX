@@ -19,7 +19,6 @@ public class BSTNode {
     Label label;
 
     public BSTNode() {
-        this.value = value;
         this.circle = new Circle();
         this.label = new Label();
         this.group = new Group();
@@ -27,14 +26,15 @@ public class BSTNode {
         this.circle.setStyle("-fx-fill: #d76464");
         Font font = Font.font("Courier New", FontWeight.BOLD, 24);
         this.label.setFont(font);
-        this.group.setLayoutX(1000);
-        this.group.setLayoutY(100);
+        this.label.setLayoutX(-15);
+        this.label.setLayoutY(-15);
         this.group.getChildren().add(this.circle);
         this.group.getChildren().add(this.label);
     }
 
     public BSTNode(int value) {
         this();
+        this.value = value;
         this.label.setText(Integer.toString(value));
     }
 }

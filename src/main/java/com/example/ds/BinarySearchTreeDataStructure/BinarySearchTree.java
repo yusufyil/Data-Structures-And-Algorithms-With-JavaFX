@@ -1,6 +1,6 @@
 package com.example.ds.BinarySearchTreeDataStructure;
 
-import javafx.scene.Node;
+
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -36,19 +36,24 @@ public class BinarySearchTree {
 
     }
     public void insert(int value){
-        this.root = this.insertRecursively(root, value);
+        int startingPositionX = (int) (this.BSTStage.getWidth() / 2);
+        int startingPositionY = 100;
+        this.root = this.insertRecursively(root, value, startingPositionX, startingPositionY);
     }
-    private BSTNode insertRecursively(BSTNode root, int value){
+    private BSTNode insertRecursively(BSTNode root, int value, int startX, int startY){
 
         if (root == null) {
             root = new BSTNode(value);
+            root.group.setLayoutX(startX);
+            root.group.setLayoutY(startY);
+            this.anchorPane.getChildren().add(root.group);
             return root;
-        }
-
-        if (value <= root.value) {
-            root.left = insertRecursively(root.left, value);
-        } else if (value > root.value) {
-            root.right = insertRecursively(root.right, value);
+        }else{
+            if (value < root.value) {
+                root.left = insertRecursively(root.left, value, startX - 150, startY + 80);
+            } else if (value > root.value) {
+                root.right = insertRecursively(root.right, value, startX + 150, startY + 80);
+            }
         }
         return root;
     }
@@ -101,7 +106,7 @@ public class BinarySearchTree {
         TextField textField = new TextField();
         textField.setPrefWidth(390);
         textField.setPrefHeight(60);
-        textField.setStyle("-fx-background-color: #9fbbea");
+        textField.setStyle("-fx-background-color: #096085");
         textField.setFont(font);
         textField.setPromptText("Any number");
         vBox.getChildren().add(textField);
@@ -118,6 +123,15 @@ public class BinarySearchTree {
         insertToTree.setOnMouseExited(mouseEvent -> {
             insertToTree.setStyle("-fx-background-color: #2fdc60");
         });
+        insertToTree.setOnMouseClicked(mouseEvent -> {
+            try{
+                int value = Integer.parseInt(textField.getText());
+                this.insert(value);
+            }catch (Exception e){
+                System.out.println("Error." + e);
+                e.printStackTrace();
+            }
+        });
         vBox.getChildren().add(insertToTree);
 
         Button deleteFromTree = new Button();
@@ -132,16 +146,24 @@ public class BinarySearchTree {
         deleteFromTree.setOnMouseExited(mouseEvent -> {
             deleteFromTree.setStyle("-fx-background-color: #2fdc60");
         });
+        deleteFromTree.setOnMouseClicked(mouseEvent -> {
+            try{
+                int value = Integer.parseInt(textField.getText());
+                this.delete(value);
+            }catch (Exception e){
+                System.out.println("Error." + e);
+            }
+        });
         vBox.getChildren().add(deleteFromTree);
 
         Scene scene1 = new Scene(vBox);
         Stage miniStage = new Stage();
         miniStage.setScene(scene1);
         miniStage.setAlwaysOnTop(true);
+        miniStage.setOpacity(0.8);
         miniStage.show();
     }
     public Stage getBSTStage(){
         return BSTStage;
     }
-
 }

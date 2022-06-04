@@ -15,7 +15,6 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 import java.net.URL;
-import java.util.ArrayList;
 
 public class WelcomeScreen {
     Stage welcomeStage;
@@ -104,6 +103,7 @@ public class WelcomeScreen {
             BinarySearchTree BST = new BinarySearchTree(this.width, this.height);
             Stage BSTStage = BST.getBSTStage();
             BSTStage.show();
+            BST.setUpMiniScreen();
         });
         binaryButton.setOnMouseEntered(mouseEvent -> {
             binaryButton.setStyle("-fx-background-color: #91f3b8");
