@@ -2,6 +2,7 @@ package com.example.ds;
 
 import com.example.ds.ArrayDataStructure.Array;
 import com.example.ds.BinarySearchTreeDataStructure.BinarySearchTree;
+import com.example.ds.HashMapDataStructure.HashMap;
 import com.example.ds.QueueDataStructure.Queue;
 import com.example.ds.StackDataStrcuture.Stack;
 import javafx.scene.Scene;
@@ -148,6 +149,9 @@ public class WelcomeScreen {
         hashButton.setLayoutY(590);
         hashButton.setOnMouseClicked(mouseEvent -> {
             System.out.println("hash.");
+            HashMap hashMap = new HashMap(this.width, this.height);
+            Stage hashMapStage = hashMap.getHashMapStage();
+            hashMapStage.show();
         });
         hashButton.setOnMouseEntered(mouseEvent -> {
             hashButton.setStyle("-fx-background-color: #91f3b8");

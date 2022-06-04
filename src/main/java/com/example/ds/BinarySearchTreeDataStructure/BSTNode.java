@@ -9,7 +9,7 @@ import javafx.scene.text.FontWeight;
 public class BSTNode {
     BSTNode left;
     BSTNode right;
-    int value;
+    public int value;
 
     //attributes for graphical user interface
     Group group;

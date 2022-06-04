@@ -16,7 +16,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class BinarySearchTree {
-    BSTNode root;
+    public BSTNode root;
 
     //attributes for graphical user interface
     Stage BSTStage;
