@@ -74,7 +74,7 @@ public class Queue implements CreateScreen {
     }
     public void setUpScreen(){
         this.anchorPane.setStyle("-fx-background-color: #096085");
-        this.queueStage.setTitle("Stack Data Structure.");
+        this.queueStage.setTitle("Queue Data Structure.");
         this.queueStage.setResizable(false);
         this.queueStage.setWidth(this.width);
         this.queueStage.setHeight(this.height);

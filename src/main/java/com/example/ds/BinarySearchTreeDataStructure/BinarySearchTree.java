@@ -120,7 +120,7 @@ public class BinarySearchTree implements CreateScreen {
     }
     public void setUpScreen(){
         this.anchorPane.setStyle("-fx-background-color: #0b9494");
-        this.BSTStage.setTitle("Stack Data Structure.");
+        this.BSTStage.setTitle("Binary Search Tree Data Structure.");
         this.BSTStage.setResizable(false);
         this.BSTStage.setWidth(this.width);
         this.BSTStage.setHeight(this.height);
