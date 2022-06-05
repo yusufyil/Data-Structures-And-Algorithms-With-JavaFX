@@ -16,8 +16,10 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 import java.net.URL;
-
-public class WelcomeScreen {
+/**
+ * Welcome screen is the base screen where user controls everything.
+ * it contains buttons to open up other data structure screens*/
+public class WelcomeScreen implements CreateScreen{
     Stage welcomeStage;
     Scene scene;
     AnchorPane anchorPane;

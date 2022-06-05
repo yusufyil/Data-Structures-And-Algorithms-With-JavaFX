@@ -13,6 +13,8 @@ public class QueueNode {
     Group group;
     Rectangle rectangle;
     Label label;
+    /**
+     * Queue node holds basic variables for linked list implementation of queue data structure and gui components.*/
 
     public QueueNode() {
         this.next = null;

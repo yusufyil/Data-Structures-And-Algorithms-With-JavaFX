@@ -1,5 +1,6 @@
 package com.example.ds.ArrayDataStructure;
 
+import com.example.ds.CreateScreen;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -16,8 +17,9 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
-
-public class Array {
+/**
+ * This class implements basics of array data structure and its behaviours in graphical user interface*/
+public class Array implements CreateScreen {
 
     int[] arr;
     ArrayList<Label> listOfLabels;
@@ -105,7 +107,7 @@ public class Array {
     }
     public void drawArrayToPane(){
         Font font = Font.font("Courier New", FontWeight.BOLD, 24);
-        Group arrayBoundries = new Group();
+        Group arrayBoundries = new Group();//this group holds up lines and labels to draw array
 
         //drawing an appropriate rectangle to represent array
         int startingPositionX = ((int)arrayStage.getWidth() - (100 * this.arr.length + (this.arr.length + 1) * 5)) / 2;

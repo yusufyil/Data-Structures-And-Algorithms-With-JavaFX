@@ -1,5 +1,6 @@
 package com.example.ds.StackDataStrcuture;
 
+import com.example.ds.CreateScreen;
 import javafx.animation.SequentialTransition;
 import javafx.animation.TranslateTransition;
 import javafx.scene.Scene;
@@ -15,7 +16,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class Stack {
+public class Stack implements CreateScreen {
     StackNode top;
     private int numberOfElements = 0;
 

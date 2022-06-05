@@ -1,5 +1,6 @@
 package com.example.ds.HashMapDataStructure;
 
+import com.example.ds.CreateScreen;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -12,7 +13,12 @@ import javafx.scene.text.TextAlignment;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
-public class HashMap {
+/**
+ * This class implements basic operations on hashmap and visualizes it on the scene
+ * hashMapNodes array holds first entries for that particular value
+ * for each insertion hashmap ds calculates the mod of user input and places it appropriate posiiton on the graph
+ * if same mod value comes more than once, than hashmap uses bst data type in order to hold vlaues*/
+public class HashMap implements CreateScreen {
     HashMapNode[] hashMapNodes;
 
     Stage HashMapStage;

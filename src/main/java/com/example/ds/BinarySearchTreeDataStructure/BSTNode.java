@@ -17,7 +17,9 @@ public class BSTNode {
     Circle circle;
 
     Label label;
-
+    /**
+     * BSTNode stands for binary search tree node.
+     * Circle and label entities comes together in order to visualize bst node in gui*/
     public BSTNode() {
         this.circle = new Circle();
         this.label = new Label();

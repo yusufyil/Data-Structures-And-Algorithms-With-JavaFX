@@ -1,5 +1,6 @@
 package com.example.ds.QueueDataStructure;
 
+import com.example.ds.CreateScreen;
 import javafx.animation.SequentialTransition;
 import javafx.animation.TranslateTransition;
 import javafx.scene.Scene;
@@ -14,7 +15,10 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
-public class Queue {
+/**
+ * This class implements basic operations on queue data structure and necessary visual animations
+ * Translate transition animation has been used in order to move nodes on screen*/
+public class Queue implements CreateScreen {
     QueueNode front;
     QueueNode rear;
     int numberOfElements;

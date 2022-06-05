@@ -6,6 +6,11 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.TextAlignment;
 
+/**
+ * This node implements basics of hashmap node.
+ * in collision situations bst data type used.
+ * Button opens up a new screen that stores all values in a binary search tree from hashmap.
+ * */
 public class HashMapNode {
 
     Button node;
